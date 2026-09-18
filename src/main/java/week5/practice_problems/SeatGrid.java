@@ -1,0 +1,53 @@
+package week5.class_problems;
+
+public class SeatGrid {
+
+    static double rowAverage(int[] row) {
+
+        int sum = 0;
+
+        for (int value : row) {
+            sum += value;
+        }
+
+        return (double) sum / row.length;
+    }
+
+    static String classifyRows(
+            int[][] seatingScores,
+            int threshold) {
+
+        String result = "";
+
+        for (int i = 0; i < seatingScores.length; i++) {
+
+            double average =
+                    rowAverage(seatingScores[i]);
+
+            if (average < threshold) {
+                result += "Row " + i + ": Quiet Zone";
+            } else {
+                result += "Row " + i + ": Buzzing Zone";
+            }
+
+            if (i < seatingScores.length - 1) {
+                result += " | ";
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        int[][] scores = {
+                {40, 50, 45},
+                {85, 90, 95},
+                {30, 20, 25}
+        };
+
+        System.out.println(
+                classifyRows(scores, 60)
+        );
+    }
+}
